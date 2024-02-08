@@ -30,7 +30,6 @@ namespace Scripts.BaseFixtures {
             InitChannels();
         }
 
-
         private void InitChannels()
         {
             channels = new List<ushort>();
