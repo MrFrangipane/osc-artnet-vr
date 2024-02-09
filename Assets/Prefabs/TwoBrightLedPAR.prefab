@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 949570449995963097}
   - component: {fileID: 4273360001097975498}
   m_Layer: 0
-  m_Name: TwoBrightLedPAR
+  m_Name: TwoBrightLedPar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

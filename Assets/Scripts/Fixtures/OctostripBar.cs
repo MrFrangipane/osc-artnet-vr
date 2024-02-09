@@ -15,7 +15,7 @@ namespace Scripts.Fixtures
     
     public class OctostripBar : BaseFixtureSimpleRGB<OctostripBarMapping>
     {
-        protected override void MapChannels()
+        protected override void MapFromChannels()
         {
             // TODO: implement strobe
             color.r = channels[(int)OctostripBarMapping.Red] / 255.0f;

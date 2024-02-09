@@ -38,7 +38,7 @@ namespace Scripts {
 
         void Update()
         {
-            MapChannels();
+            MapFromChannels();
             if (targetLight != null) {
                 targetLight.color = color;
                 var p = new MaterialPropertyBlock();
@@ -47,6 +47,6 @@ namespace Scripts {
             }
         }
         
-        protected virtual void MapChannels() { }
+        protected virtual void MapFromChannels() { }
     }
 }

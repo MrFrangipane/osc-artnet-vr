@@ -50,7 +50,7 @@ namespace Scripts {
         {
             foreach (var fixture in _fixtures) {
                 for (int i = 0; i < fixture.Channels.Count(); i++) {
-                    fixture.Channels[i] = _artnetPacket.data[fixture.Address + i];
+                    fixture.Channels[i] = _artnetPacket.data[fixture.Address + i - 1];
                 }
             }
         }

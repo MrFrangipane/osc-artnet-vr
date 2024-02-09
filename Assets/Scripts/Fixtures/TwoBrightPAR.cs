@@ -14,7 +14,7 @@ namespace Scripts
 
     public class TwoBrightPAR : BaseFixtureSimpleRGB<TwoBrightPARMapping>
     {
-        protected override void MapChannels()
+        protected override void MapFromChannels()
         {
             // TODO: implement White, Amber, UV
             color.r = channels[(int)TwoBrightPARMapping.Red] / 255.0f;
