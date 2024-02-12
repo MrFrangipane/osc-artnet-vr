@@ -26,7 +26,7 @@ namespace Scripts.Fixtures
         Reset // 128-255
     }
 
-    public class Tristan200 : BaseFixtureMovingHead<OctostripBarMapping>
+    public class Tristan200 : BaseFixtureMovingHead<Tristan200Mapping>
     {
         protected override void MapChannels()
         {
@@ -35,8 +35,8 @@ namespace Scripts.Fixtures
 
             color = Color.HSVToRGB(
                 channels[(int)Tristan200Mapping.Color] / 255.0f,
-                1f,
-                1f // channels[(int)Tristan200Mapping.Dimmer] / 255.0f
+                (channels[(int)Tristan200Mapping.Color] == 64) ? 0f: 1f, // color 64 is white 
+                channels[(int)Tristan200Mapping.Dimmer] / 255.0f
             );
         }
     }
