@@ -22,8 +22,16 @@ namespace Scripts.BaseFixtures {
         public GameObject panObject;
         public GameObject tiltObject;
 
+        public float valueDifferenceThreshold = 10f;
+        public float speedDifferenceThreshold = 2f;
+        public float speedStep = .5f;
+        public float nominalSpeed = 5f;
+        
         [SerializeField] protected List<ushort> channels;
         [SerializeField] private Int16 address = 1;
+
+        private MovingHeadRotation _panRotation = new MovingHeadRotation();
+        private MovingHeadRotation _tiltRotation = new MovingHeadRotation();
 
         void Start()
         {
@@ -41,10 +49,19 @@ namespace Scripts.BaseFixtures {
 
         void Update()
         {
+            _panRotation.ValueDifferenceThreshold = valueDifferenceThreshold;
+            _panRotation.SpeedDifferenceThreshold = speedDifferenceThreshold;
+            _panRotation.SpeedStep = speedStep;
+            _panRotation.NominalSpeed = nominalSpeed;
+            
+            _tiltRotation.ValueDifferenceThreshold = valueDifferenceThreshold;
+            _tiltRotation.SpeedDifferenceThreshold = speedDifferenceThreshold;
+            _tiltRotation.SpeedStep = speedStep;
+            _tiltRotation.NominalSpeed = nominalSpeed;
+
             MapChannels();
             if (targetLight is not null)
             {
-
                 targetLight.color = color;
                 var p = new MaterialPropertyBlock();
                 p.SetColor("_EmissiveColor", color * multiplicationFactor);
@@ -53,17 +70,19 @@ namespace Scripts.BaseFixtures {
 
             if (panObject is not null)
             {
+                _panRotation.SetTargetValue(pan);
                 panObject.transform.SetLocalPositionAndRotation(
                     panObject.transform.localPosition,
-                    Quaternion.Euler(0, pan, 0)
+                    Quaternion.Euler(0, -_panRotation.Update(), 0)
                 );
             }
 
             if (tiltObject is not null)
             {
+                _tiltRotation.SetTargetValue(tilt);
                 tiltObject.transform.SetLocalPositionAndRotation(
                     tiltObject.transform.localPosition,
-                    Quaternion.Euler(tilt, 0, 0)
+                    Quaternion.Euler(-_tiltRotation.Update(), 0, 0)
                 );
             }
         }
