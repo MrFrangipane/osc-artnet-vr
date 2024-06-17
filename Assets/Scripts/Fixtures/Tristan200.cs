@@ -1,4 +1,5 @@
-﻿using Scripts.BaseFixtures;
+﻿using System.Collections.Generic;
+using Scripts.BaseFixtures;
 using UnityEngine;
 
 
@@ -33,8 +34,27 @@ namespace Scripts.Fixtures
             pan = (channels[(int)Tristan200Mapping.Pan] / 255.0f * 540) - 270;
             tilt = (channels[(int)Tristan200Mapping.Tilt] / 255.0f * 270) - 135;
 
+            var colorWheel = new Dictionary<int, float> {
+                { 66, 0f },
+                { 67, 0.04f },
+                { 68, 0.06f },
+                { 69, 0.09f },
+                { 70, 0.12f },
+                { 71, 0.18f },
+                { 72, 0.30f },
+                { 78, 0.46f },
+                { 74, 0.63f },
+                { 80, 0.84f }
+            };
+
+            var hue = 0.0f;
+            if (colorWheel.ContainsKey(channels[(int)Tristan200Mapping.Color]))
+            {
+                hue = colorWheel[channels[(int)Tristan200Mapping.Color]];
+            }
+            
             color = Color.HSVToRGB(
-                channels[(int)Tristan200Mapping.Color] / 255.0f,
+                hue,
                 (channels[(int)Tristan200Mapping.Color] == 64) ? 0f: 1f, // color 64 is white 
                 channels[(int)Tristan200Mapping.Dimmer] / 255.0f
             );
