@@ -24,7 +24,7 @@ namespace Scripts
         {
             // 
             // Speed
-            var valueDifference = _targetValue- _actualValue;
+            var valueDifference = _targetValue - _actualValue;
             if (valueDifference > ValueDifferenceThreshold)
             {
                 _targetSpeed = NominalSpeed;
